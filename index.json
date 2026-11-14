@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:16:28Z",
+ "updated": "2026-11-14T17:19:14Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -12,8 +12,10 @@
    "category": "game",
    "tags": [],
    "controls": "A D: run\nLEFT RIGHT: or run\nSPACE: jump, hold for higher; start",
-   "cover": "../library/img/cover-cloudberry.webp",
-   "shot": "../library/img/cloudberry.webp",
+   "cover": "covers/cloudberry.webp",
+   "shots": [
+    "shots/cloudberry-1.webp"
+   ],
    "machine": {
     "ram": 64,
     "niece": true
@@ -25,7 +27,7 @@
      "length": 21002
     }
    ],
-   "bytes": 321445,
+   "bytes": 456721,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -42,8 +44,10 @@
    "category": "game",
    "tags": [],
    "controls": "A D: move\nLEFT RIGHT: or move\nSPACE: fire (hold for more), start",
-   "cover": "../library/img/cover-debug.webp",
-   "shot": "../library/img/debug.webp",
+   "cover": "covers/debug.webp",
+   "shots": [
+    "shots/debug-1.webp"
+   ],
    "machine": {
     "ram": 16,
     "niece": false
@@ -55,7 +59,7 @@
      "length": 4128
     }
    ],
-   "bytes": 182349,
+   "bytes": 275770,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -72,8 +76,10 @@
    "category": "game",
    "tags": [],
    "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
-   "cover": "../library/img/cover-fellrider.webp",
-   "shot": "../library/img/fellrider.webp",
+   "cover": "covers/fellrider.webp",
+   "shots": [
+    "shots/fellrider-1.webp"
+   ],
    "machine": {
     "ram": 64,
     "niece": true
@@ -85,7 +91,7 @@
      "length": 14080
     }
    ],
-   "bytes": 280767,
+   "bytes": 394165,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -103,8 +109,10 @@
    "tags": [],
    "controls": "RETURN: play\nSPACE: stop\nT: next tune\nZ-M: piano, stopped\nI: instruments\n?: all the keys",
    "instructions": "Four tunes are on the tape: press RETURN. Then stop it, write your own, and save it to tape with the deck's Rec.",
-   "cover": "../library/img/cover-tracker.webp",
-   "shot": "../library/img/tracker.webp",
+   "cover": "covers/music-tracker.webp",
+   "shots": [
+    "shots/music-tracker-1.webp"
+   ],
    "deck": true,
    "machine": {
     "ram": 16,
@@ -117,7 +125,7 @@
      "length": 13632
     }
    ],
-   "bytes": 250373,
+   "bytes": 363248,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -134,8 +142,10 @@
    "category": "game",
    "tags": [],
    "controls": "W A D: A D turn, W thrust\nUP LEFT RIGHT: the same\nSPACE: fire (hold for more), start",
-   "cover": "../library/img/cover-orbit.webp",
-   "shot": "../library/img/orbit.webp",
+   "cover": "covers/orbit.webp",
+   "shots": [
+    "shots/orbit-1.webp"
+   ],
    "machine": {
     "ram": 16,
     "niece": false
@@ -147,7 +157,7 @@
      "length": 7312
     }
    ],
-   "bytes": 216653,
+   "bytes": 283210,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -164,8 +174,10 @@
    "category": "game",
    "tags": [],
    "controls": "W A S D: steer, hold two to turn twice\nUP LEFT DOWN RIGHT: or steer\nSPACE: start",
-   "cover": "../library/img/cover-snake.webp",
-   "shot": "../library/img/snake.webp",
+   "cover": "covers/snake.webp",
+   "shots": [
+    "shots/snake-1.webp"
+   ],
    "machine": {
     "ram": 16,
     "niece": false
@@ -177,7 +189,7 @@
      "length": 1715
     }
    ],
-   "bytes": 157747,
+   "bytes": 204733,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -208,7 +220,7 @@
      "length": 415
     }
    ],
-   "bytes": 130966,
+   "bytes": 131077,
    "width": 1004,
    "height": 638,
    "source": true,
