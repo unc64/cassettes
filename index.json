@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:44:14Z",
+ "updated": "2026-11-14T17:48:32Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -34,73 +34,8 @@
    "source": true,
    "lang": "asm",
    "added": "2026-11-14",
-   "featured": true
-  },
-  {
-   "id": "debug",
-   "file": "cassettes/debug.unc.png",
-   "title": "DEBUG",
-   "author": "United Northern Computers",
-   "about": "Bugs march down the screen in formation. You're the cursor. Fix them.",
-   "category": "game",
-   "tags": [],
-   "controls": "A D: move\nLEFT RIGHT: or move\nSPACE: fire (hold for more), start",
-   "source_url": "https://github.com/unc64/unc64/blob/main/games/debug.s",
-   "cover": "covers/debug.webp",
-   "shots": [
-    "shots/debug-1.webp"
-   ],
-   "machine": {
-    "ram": 16,
-    "niece": false
-   },
-   "programs": [
-    {
-     "name": "DEBUG",
-     "type": 1,
-     "length": 4128
-    }
-   ],
-   "bytes": 275770,
-   "width": 1004,
-   "height": 638,
-   "source": true,
-   "lang": "asm",
-   "added": "2026-11-14",
-   "featured": true
-  },
-  {
-   "id": "fellrider",
-   "file": "cassettes/fellrider.unc.png",
-   "title": "FELLRIDER",
-   "author": "United Northern Computers",
-   "about": "A moped over the fells, as far as it will go. Pick up the coins and the gas cans.",
-   "category": "game",
-   "tags": [],
-   "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
-   "source_url": "https://github.com/unc64/unc64/tree/main/games",
-   "cover": "covers/fellrider.webp",
-   "shots": [
-    "shots/fellrider-1.webp"
-   ],
-   "machine": {
-    "ram": 64,
-    "niece": true
-   },
-   "programs": [
-    {
-     "name": "FELLRIDER",
-     "type": 1,
-     "length": 14080
-    }
-   ],
-   "bytes": 394165,
-   "width": 1004,
-   "height": 638,
-   "source": true,
-   "lang": "asm",
-   "added": "2026-11-14",
-   "featured": true
+   "featured": true,
+   "order": 1
   },
   {
    "id": "music-tracker",
@@ -135,40 +70,42 @@
    "source": true,
    "lang": "asm",
    "added": "2026-11-14",
-   "featured": true
+   "featured": true,
+   "order": 2
   },
   {
-   "id": "orbit",
-   "file": "cassettes/orbit.unc.png",
-   "title": "ORBIT",
+   "id": "fellrider",
+   "file": "cassettes/fellrider.unc.png",
+   "title": "FELLRIDER",
    "author": "United Northern Computers",
-   "about": "Shoot the drifting rocks: a big one splits in two, a small one is gone.",
+   "about": "A moped over the fells, as far as it will go. Pick up the coins and the gas cans.",
    "category": "game",
    "tags": [],
-   "controls": "W A D: A D turn, W thrust\nUP LEFT RIGHT: the same\nSPACE: fire (hold for more), start",
-   "source_url": "https://github.com/unc64/unc64/blob/main/games/orbit.s",
-   "cover": "covers/orbit.webp",
+   "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
+   "source_url": "https://github.com/unc64/unc64/tree/main/games",
+   "cover": "covers/fellrider.webp",
    "shots": [
-    "shots/orbit-1.webp"
+    "shots/fellrider-1.webp"
    ],
    "machine": {
-    "ram": 16,
-    "niece": false
+    "ram": 64,
+    "niece": true
    },
    "programs": [
     {
-     "name": "ORBIT",
+     "name": "FELLRIDER",
      "type": 1,
-     "length": 7312
+     "length": 14080
     }
    ],
-   "bytes": 283210,
+   "bytes": 394165,
    "width": 1004,
    "height": 638,
    "source": true,
    "lang": "asm",
    "added": "2026-11-14",
-   "featured": true
+   "featured": true,
+   "order": 3
   },
   {
    "id": "snake",
@@ -201,7 +138,42 @@
    "source": true,
    "lang": "asm",
    "added": "2026-11-14",
-   "featured": true
+   "featured": true,
+   "order": 4
+  },
+  {
+   "id": "orbit",
+   "file": "cassettes/orbit.unc.png",
+   "title": "ORBIT",
+   "author": "United Northern Computers",
+   "about": "Shoot the drifting rocks: a big one splits in two, a small one is gone.",
+   "category": "game",
+   "tags": [],
+   "controls": "W A D: A D turn, W thrust\nUP LEFT RIGHT: the same\nSPACE: fire (hold for more), start",
+   "source_url": "https://github.com/unc64/unc64/blob/main/games/orbit.s",
+   "cover": "covers/orbit.webp",
+   "shots": [
+    "shots/orbit-1.webp"
+   ],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "ORBIT",
+     "type": 1,
+     "length": 7312
+    }
+   ],
+   "bytes": 283210,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true,
+   "order": 5
   },
   {
    "id": "frosthall",
@@ -229,6 +201,40 @@
     }
    ],
    "bytes": 277968,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true,
+   "order": 6
+  },
+  {
+   "id": "debug",
+   "file": "cassettes/debug.unc.png",
+   "title": "DEBUG",
+   "author": "United Northern Computers",
+   "about": "Bugs march down the screen in formation. You're the cursor. Fix them.",
+   "category": "game",
+   "tags": [],
+   "controls": "A D: move\nLEFT RIGHT: or move\nSPACE: fire (hold for more), start",
+   "source_url": "https://github.com/unc64/unc64/blob/main/games/debug.s",
+   "cover": "covers/debug.webp",
+   "shots": [
+    "shots/debug-1.webp"
+   ],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "DEBUG",
+     "type": 1,
+     "length": 4128
+    }
+   ],
+   "bytes": 275770,
    "width": 1004,
    "height": 638,
    "source": true,

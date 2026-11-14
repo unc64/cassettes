@@ -12,7 +12,7 @@
 // index.json holds two kinds of thing. The curation is yours to edit: id, file, category,
 // tags, controls, instructions, source_url (the author's own repository on GitHub, where
 // "Read the source" leads), cover and shot (pictures the site holds: a card shows the
-// screenshot with the cover on its corner, and the cassette's face without them), deck (it saves and loads: the
+// screenshot with the cover on its corner, and the cassette's face without them), order (its place in the front row, for a featured one), deck (it saves and loads: the
 // Portal's player shows the tape deck's Rec and Play), featured, added, discuss (controls and instructions
 // come from the cassette when the index doesn't say). The rest is read from each cassette
 // (title, author, about, machine, programs, bytes, width, height, source, lang) and
@@ -132,10 +132,12 @@ function derive(entry) {
     programs: programs.map((p) => ({ name: p.name, type: p.type, length: p.length })),
     bytes, width, height, source: !!c.files, lang,
     added: entry.added || new Date().toISOString().slice(0, 10), featured: !!entry.featured,
+    ...(entry.featured && Number.isInteger(entry.order) && entry.order > 0 && entry.order < 100 ? { order: entry.order } : {}),
     ...(entry.discuss ? { discuss: entry.discuss } : {}),
   };
 }
-const order = (list) => [...list].sort((a, b) => (b.featured - a.featured) || b.added.localeCompare(a.added) || a.title.localeCompare(b.title));
+// The front row first, in the order the index gives it (`order`: 1, 2, 3...), then the newest.
+const order = (list) => [...list].sort((a, b) => (b.featured - a.featured) || ((a.order ?? 999) - (b.order ?? 999)) || b.added.localeCompare(a.added) || a.title.localeCompare(b.title));
 
 // The source each cassette carries, laid out as files: source/<id>/<its files>. It's what
 // "Read the source" on the Portal links to, here on GitHub. Written by build from the
