@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:19:14Z",
+ "updated": "2026-11-14T17:26:17Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -196,6 +196,39 @@
    "lang": "asm",
    "added": "2026-11-14",
    "featured": true
+  },
+  {
+   "id": "stack",
+   "file": "cassettes/stack.unc.png",
+   "title": "STACK",
+   "author": "United Northern Computers",
+   "about": "A falling-block puzzle. Trominoes, full rows clear, and every eighth piece is a bomb.",
+   "category": "game",
+   "tags": [],
+   "controls": "A D: move\nW: rotate\nS: soft drop\nLEFT RIGHT UP DOWN: the same\nSPACE: hard drop, start",
+   "cover": "covers/stack.webp",
+   "shots": [
+    "shots/stack-1.webp"
+   ],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "STACK",
+     "type": 1,
+     "length": 2567
+    }
+   ],
+   "bytes": 234384,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": false,
+   "discuss": "https://github.com/unc64/cassettes/issues/1"
   },
   {
    "id": "sun",
