@@ -1,0 +1,55 @@
+# A submission (an issue from the "Submit a cassette" form) becomes a pull request: the
+# attached cassette is fetched and checked (tools/submission.mjs), put on a branch of its
+# own, and offered for a person to merge. Editing the issue does it again, onto the same
+# branch. The issue's text is never run and never put into a command: the script reads it
+# from the event's file, and the steps below pass only what the script wrote, through files.
+#
+# The pull request needs Settings > Actions > General > "Allow GitHub Actions to create and
+# approve pull requests". Without it the branch is still pushed, and the comment says so.
+name: submission
+on:
+  issues:
+    types: [opened, edited, reopened]
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+concurrency:
+  group: submission-${{ github.event.issue.number }}
+  cancel-in-progress: true
+jobs:
+  take:
+    if: ${{ !github.event.issue.pull_request && contains(github.event.issue.body, '### The cassette') }}
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_TOKEN: ${{ github.token }}
+      ISSUE: ${{ github.event.issue.number }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Fetch it, check it, put it on the shelf
+        run: node tools/submission.mjs
+      - name: A branch and a pull request
+        run: |
+          r="$RUNNER_TEMP/submission.json"
+          jq -r .comment "$r" > "$RUNNER_TEMP/comment.md"
+          if [ "$(jq -r .ok "$r")" = true ]; then
+            branch="submission/$ISSUE"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git checkout -q -B "$branch"
+            git add cassettes index.json
+            jq -r .commit "$r" > "$RUNNER_TEMP/commit.txt"
+            git commit -q -F "$RUNNER_TEMP/commit.txt"
+            git push -q --force origin "$branch"
+            jq -r .pr_title "$r" > "$RUNNER_TEMP/title.txt"
+            jq -r .pr_body "$r" > "$RUNNER_TEMP/body.md"
+            if gh pr view "$branch" --json state -q .state 2>/dev/null | grep -q OPEN; then
+              gh pr edit "$branch" --title "$(cat "$RUNNER_TEMP/title.txt")" --body-file "$RUNNER_TEMP/body.md"
+            elif ! gh pr create --head "$branch" --base main --title "$(cat "$RUNNER_TEMP/title.txt")" --body-file "$RUNNER_TEMP/body.md"; then
+              printf '\n\n<sub>(For the maintainers: the branch `%s` is pushed, but I may not open pull requests here. Settings, Actions, General: allow GitHub Actions to create pull requests.)</sub>\n' "$branch" >> "$RUNNER_TEMP/comment.md"
+            fi
+          fi
+          gh issue comment "$ISSUE" --body-file "$RUNNER_TEMP/comment.md"

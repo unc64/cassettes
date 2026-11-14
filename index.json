@@ -1,0 +1,208 @@
+{
+ "format": "unc64-portal",
+ "version": 1,
+ "updated": "2026-11-14T16:45:52Z",
+ "cassettes": [
+  {
+   "id": "cloudberry",
+   "file": "cassettes/cloudberry.unc.png",
+   "title": "CLOUDBERRY",
+   "author": "United Northern Computers",
+   "about": "Late summer on the fells. Run and jump across bog, birch wood and stones for cloudberries, to the hut at the end.",
+   "category": "game",
+   "tags": [],
+   "controls": "A D or the cursor keys run. SPACE jumps: hold it for higher.",
+   "cover": "../library/img/cover-cloudberry.webp",
+   "machine": {
+    "ram": 64,
+    "niece": true
+   },
+   "programs": [
+    {
+     "name": "CLOUDBERRY",
+     "type": 1,
+     "length": 21002
+    }
+   ],
+   "bytes": 321445,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true
+  },
+  {
+   "id": "debug",
+   "file": "cassettes/debug.unc.png",
+   "title": "DEBUG",
+   "author": "United Northern Computers",
+   "about": "Bugs march down the screen in formation. You're the cursor. Fix them.",
+   "category": "game",
+   "tags": [],
+   "controls": "A D or the cursor keys move. SPACE fires, and starts.",
+   "cover": "../library/img/cover-debug.webp",
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "DEBUG",
+     "type": 1,
+     "length": 4128
+    }
+   ],
+   "bytes": 182349,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true
+  },
+  {
+   "id": "fellrider",
+   "file": "cassettes/fellrider.unc.png",
+   "title": "FELLRIDER",
+   "author": "United Northern Computers",
+   "about": "A moped over the fells, as far as it will go. Pick up the coins and the gas cans.",
+   "category": "game",
+   "tags": [],
+   "controls": "D gas, A brake, W lean back, S lean forward (or the cursor keys). SPACE starts.",
+   "cover": "../library/img/cover-fellrider.webp",
+   "machine": {
+    "ram": 64,
+    "niece": true
+   },
+   "programs": [
+    {
+     "name": "FELLRIDER",
+     "type": 1,
+     "length": 14080
+    }
+   ],
+   "bytes": 280767,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true
+  },
+  {
+   "id": "music-tracker",
+   "file": "cassettes/music-tracker.unc.png",
+   "title": "MUSIC TRACKER",
+   "author": "R.",
+   "about": "A three-voice tracker for the AUNT, the UNC's sound chip, with four tunes on the tape. Press RETURN. Then stop it and write your own.",
+   "category": "music",
+   "tags": [],
+   "controls": "RETURN plays, SPACE stops, T is the next tune, I the instruments, ? all the keys.",
+   "cover": "../library/img/cover-tracker.webp",
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "MUSIC TRACKER",
+     "type": 1,
+     "length": 13632
+    }
+   ],
+   "bytes": 250373,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true
+  },
+  {
+   "id": "orbit",
+   "file": "cassettes/orbit.unc.png",
+   "title": "ORBIT",
+   "author": "United Northern Computers",
+   "about": "Shoot the drifting rocks: a big one splits in two, a small one is gone.",
+   "category": "game",
+   "tags": [],
+   "controls": "A D turn, W thrust (or the cursor keys). SPACE fires, and starts.",
+   "cover": "../library/img/cover-orbit.webp",
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "ORBIT",
+     "type": 1,
+     "length": 7312
+    }
+   ],
+   "bytes": 216653,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true
+  },
+  {
+   "id": "snake",
+   "file": "cassettes/snake.unc.png",
+   "title": "SNAKE",
+   "author": "United Northern Computers",
+   "about": "The classic, on a 40 x 25 text screen. Eat, grow, don't bite yourself.",
+   "category": "game",
+   "tags": [],
+   "controls": "W A S D or the cursor keys steer. SPACE starts.",
+   "cover": "../library/img/cover-snake.webp",
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "SNAKE",
+     "type": 1,
+     "length": 1715
+    }
+   ],
+   "bytes": 157747,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": true
+  },
+  {
+   "id": "sun",
+   "file": "cassettes/sun.unc.png",
+   "title": "SUN",
+   "author": "United Northern Computers",
+   "about": "A house, a sun, a horizon: twenty lines of UNC BASIC on the bitmap. Type LIST to read them.",
+   "category": "demo",
+   "tags": [],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "SUN",
+     "type": 2,
+     "length": 415
+    }
+   ],
+   "bytes": 117571,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "basic",
+   "added": "2026-11-14",
+   "featured": false
+  }
+ ]
+}

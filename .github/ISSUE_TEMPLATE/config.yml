@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Pack a cassette first
+    url: https://unc64.com/portal/submit/
+    about: The Submit page makes a .unc.png from your program and fills the form in.
+  - name: The guidelines
+    url: https://unc64.com/portal/guidelines/
+    about: What goes on the shelf. AI-made cassettes are welcome.

@@ -1,0 +1,51 @@
+name: Submit a cassette
+description: Send a cassette to the Portal (unc64.com/portal). The Submit page fills this in for you.
+title: "[cassette] "
+labels: ["cassette"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for making something for the UNC 64. If you haven't a `.unc.png` yet, [the Submit page](https://unc64.com/portal/submit/) makes one from a `.tap`, a `.s` or a `.bas`.
+  - type: input
+    id: cassette-title
+    attributes:
+      label: Title
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: By
+      description: As it should be shown. A name, a handle, you and your AI.
+  - type: textarea
+    id: about
+    attributes:
+      label: About it
+      description: A line or two.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options: [Game, Demo, Music, Tool, Other]
+    validations:
+      required: true
+  - type: input
+    id: controls
+    attributes:
+      label: The keys
+      placeholder: A D move, SPACE fires
+  - type: textarea
+    id: file
+    attributes:
+      label: The cassette
+      description: Drag your `.unc.png` here, as a file. If this is an update, say which cassette it replaces.
+    validations:
+      required: true
+  - type: checkboxes
+    id: mine
+    attributes:
+      label: Yours to share
+      options:
+        - label: It's mine to share, and I've read [the guidelines](https://unc64.com/portal/guidelines/). The Portal may host it and let people download and play it.
+          required: true
