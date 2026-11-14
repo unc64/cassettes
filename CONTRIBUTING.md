@@ -7,7 +7,7 @@ Three ways, the first the easiest. All of them end in a pull request that a pers
 1. Open **[unc64.com/portal/submit](https://unc64.com/portal/submit/)**.
 2. Drop your program on it: a `.unc.png` (the Machine Room's Export), a `.tap` (what the game's `SAVE` writes to `Documents/UNC 64/Cassettes`), a `.s` with its `.include`d files, or a `.bas`.
 3. Label it: title, who it's by, a line about it, its kind, what it needs (16K or 64K, the NIECE), the keys and, if it needs saying, how to play. The keys go a line each, `A D: move`, `UP DOWN LEFT RIGHT: steer`, `SPACE: fire`: the Portal shows them as keycaps beside the screen, and on a phone makes buttons of them. Both travel on the cassette.
-   If your source is in a GitHub repository of your own, give its link under **Source on GitHub**: "Read the source" on the Portal leads there, and the cassette needn't carry the source at all. (You can do both.)
+   If your source is in a GitHub repository of your own, give its link under **Source on GitHub**: "Read the source" on the Portal leads there, and the cassette needn't carry the source at all. With no link, a cassette that carries its source has it laid out here, in `source/<id>/`, and "Read the source" leads to that. (You can do both: the link wins.)
    Add **screenshots** (up to four; the first is the picture on the label and on the shelf) and **cover art** if you've made some. With no screenshot, the page takes one of the screen itself. Leave **Put the source on the cassette** ticked if you'd like people to be able to open it and learn from it.
 4. Tick that it's yours to share, and press **Submit it**. The cassette downloads, and the form here opens with your answers in it.
 5. Drag the downloaded `.unc.png` into the form's last box, **The cassette**, and submit the issue. You need a GitHub account for this step. Without one, post the file in `#show-your-programs` on [the Discord](https://discord.gg/ZHHDqkFjw) and say it's for the Portal.
@@ -32,7 +32,7 @@ node tools/shelf.mjs add ~/my-game.unc.png --category game \
 node tools/shelf.mjs check
 ```
 
-`add` checks the cassette, copies it to `cassettes/<id>.unc.png` (the id is the title in lower case; `--id` picks another) and writes its entry into `index.json`. Commit both, and open a pull request. One cassette to a pull request, please. Leave `featured` alone: the front row is picked by hand.
+`add` checks the cassette, copies it to `cassettes/<id>.unc.png` (the id is the title in lower case; `--id` picks another), writes its entry into `index.json`, and lays its source out in `source/<id>/`. Commit all three, and open a pull request. One cassette to a pull request, please. Leave `featured` alone: the front row is picked by hand.
 
 `node tools/shelf.mjs inspect FILE.unc.png` checks a file without touching anything.
 
@@ -43,6 +43,7 @@ node tools/shelf.mjs check
 - One megabyte at most.
 - The face is in a cassette's proportions (1004 x 638, or the same shape from 502 to 2008 wide).
 - A title of 40 characters or fewer, an author of 60, a line about it of 600.
+- Its source, if it carries any: 40 files at most, each 256 KB or less, with plain names (letters, digits, `.`, `_`, `-`; folders up to three deep). A program can be as many files as it needs: drop them all on the Submit page and say which is main.
 - Its pictures, if it carries any: four screenshots at most and one cover, each a PNG or a WebP of 200 KB or less.
 
 It doesn't run the program. The person who merges does, on the Portal's [try-out page](https://unc64.com/portal/try/), which plays a cassette straight from its pull request's branch.
