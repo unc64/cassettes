@@ -10,7 +10,8 @@
 //   node tools/shelf.mjs check    fails if a cassette breaks a rule, or index.json isn't what build writes
 //
 // index.json holds two kinds of thing. The curation is yours to edit: id, file, category,
-// tags, controls, instructions, cover, featured, added, discuss (controls and instructions
+// tags, controls, instructions, cover, deck (it saves and loads: the
+// Portal's player shows the tape deck's Rec and Play), featured, added, discuss (controls and instructions
 // come from the cassette when the index doesn't say). The rest is read from each cassette
 // (title, author, about, machine, programs, bytes, width, height, source, lang) and
 // rewritten by build. The format: docs/cassettes.md in unc64/unc64, "The Portal's index".
@@ -81,6 +82,7 @@ function derive(entry) {
     ...text('controls', entry.controls ?? c.extra.controls, 400),
     ...text('instructions', entry.instructions ?? c.extra.instructions, 800),
     ...(entry.cover ? { cover: entry.cover } : {}),
+    ...(entry.deck ? { deck: true } : {}),
     machine: { ram: c.machine.ram, niece: !!c.machine.niece, ...(c.machine.aunt === false ? { aunt: false } : {}) },
     programs: programs.map((p) => ({ name: p.name, type: p.type, length: p.length })),
     bytes, width, height, source: !!c.files, lang,

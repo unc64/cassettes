@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:00:43Z",
+ "updated": "2026-11-14T17:06:05Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -101,6 +101,7 @@
    "controls": "RETURN: play\nSPACE: stop\nT: next tune\nZ-M: piano, stopped\nI: instruments\n?: all the keys",
    "instructions": "Four tunes are on the tape: press RETURN. Then stop it, write your own, and save it to tape with the deck's Rec.",
    "cover": "../library/img/cover-tracker.webp",
+   "deck": true,
    "machine": {
     "ram": 16,
     "niece": false
