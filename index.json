@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:42:38Z",
+ "updated": "2026-11-14T17:44:14Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -202,6 +202,39 @@
    "lang": "asm",
    "added": "2026-11-14",
    "featured": true
+  },
+  {
+   "id": "frosthall",
+   "file": "cassettes/frosthall.unc.png",
+   "title": "FROSTHALL",
+   "author": "United Northern Computers",
+   "about": "A walk round a hall of timber, stone and ice, in three dimensions, on a 1 MHz processor. The NIECE copies the walls a column at a time and does the sums; the panel counts the pictures a second.",
+   "category": "demo",
+   "tags": [],
+   "controls": "W A S D: W walk on, S walk back, A D turn\nUP DOWN LEFT RIGHT: the same\n1 2 3: how the walls are worked out",
+   "instructions": "Walk round the hall. 1 casts a ray for every column, 2 for every other column and fills in between (as it starts), 3 draws 40 coarser columns: the panel shows the pictures a second each gets.",
+   "source_url": "https://github.com/unc64/unc64/tree/main/games",
+   "shots": [
+    "shots/frosthall-1.png"
+   ],
+   "machine": {
+    "ram": 64,
+    "niece": true
+   },
+   "programs": [
+    {
+     "name": "FROSTHALL",
+     "type": 1,
+     "length": 20206
+    }
+   ],
+   "bytes": 277968,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": false
   },
   {
    "id": "stack",
