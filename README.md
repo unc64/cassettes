@@ -25,6 +25,7 @@ The page packs it into a cassette on a UNC 64 of its own, takes the label's pict
 | | |
 |---|---|
 | `cassettes/<id>.unc.png` | The cassettes, byte for byte as they were sent in. `<id>` is a cassette's name on the Portal: `unc64.com/portal/<id>/`. |
+| `source/<id>/` | Each cassette's source, if its author included it, as files to read: what "Read the source" on the Portal opens. Written from the cassettes by `tools/shelf.mjs build`; don't edit it. |
 | `index.json` | The shelf's index, which the Portal, the Machine Room and the game read: what's on each cassette, and the curation (kind, keys, the front row). |
 | `tools/shelf.mjs` | The shelf's rules and its index: `inspect`, `add`, `remove`, `build`, `check`. Node 20 or later, nothing to install. |
 | `tools/submission.mjs` | The bot: a submission issue into a pull request. |
