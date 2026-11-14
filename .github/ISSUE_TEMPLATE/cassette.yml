@@ -30,11 +30,20 @@ body:
       options: [Game, Demo, Music, Tool, Other]
     validations:
       required: true
-  - type: input
+  - type: textarea
     id: controls
     attributes:
       label: The keys
-      placeholder: A D move, SPACE fires
+      description: "A line each: the keys, a colon, what they do. They're shown as keycaps beside the screen."
+      placeholder: |
+        A D: move
+        LEFT RIGHT: or move
+        SPACE: fire
+  - type: textarea
+    id: instructions
+    attributes:
+      label: How to play
+      description: If it needs saying. What you're trying to do, and anything that isn't obvious.
   - type: textarea
     id: file
     attributes:

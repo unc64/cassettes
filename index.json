@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T16:45:52Z",
+ "updated": "2026-11-14T17:00:43Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -11,7 +11,7 @@
    "about": "Late summer on the fells. Run and jump across bog, birch wood and stones for cloudberries, to the hut at the end.",
    "category": "game",
    "tags": [],
-   "controls": "A D or the cursor keys run. SPACE jumps: hold it for higher.",
+   "controls": "A D: run\nLEFT RIGHT: or run\nSPACE: jump, hold for higher; start",
    "cover": "../library/img/cover-cloudberry.webp",
    "machine": {
     "ram": 64,
@@ -40,7 +40,7 @@
    "about": "Bugs march down the screen in formation. You're the cursor. Fix them.",
    "category": "game",
    "tags": [],
-   "controls": "A D or the cursor keys move. SPACE fires, and starts.",
+   "controls": "A D: move\nLEFT RIGHT: or move\nSPACE: fire (hold for more), start",
    "cover": "../library/img/cover-debug.webp",
    "machine": {
     "ram": 16,
@@ -69,7 +69,7 @@
    "about": "A moped over the fells, as far as it will go. Pick up the coins and the gas cans.",
    "category": "game",
    "tags": [],
-   "controls": "D gas, A brake, W lean back, S lean forward (or the cursor keys). SPACE starts.",
+   "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
    "cover": "../library/img/cover-fellrider.webp",
    "machine": {
     "ram": 64,
@@ -98,7 +98,8 @@
    "about": "A three-voice tracker for the AUNT, the UNC's sound chip, with four tunes on the tape. Press RETURN. Then stop it and write your own.",
    "category": "music",
    "tags": [],
-   "controls": "RETURN plays, SPACE stops, T is the next tune, I the instruments, ? all the keys.",
+   "controls": "RETURN: play\nSPACE: stop\nT: next tune\nZ-M: piano, stopped\nI: instruments\n?: all the keys",
+   "instructions": "Four tunes are on the tape: press RETURN. Then stop it, write your own, and save it to tape with the deck's Rec.",
    "cover": "../library/img/cover-tracker.webp",
    "machine": {
     "ram": 16,
@@ -127,7 +128,7 @@
    "about": "Shoot the drifting rocks: a big one splits in two, a small one is gone.",
    "category": "game",
    "tags": [],
-   "controls": "A D turn, W thrust (or the cursor keys). SPACE fires, and starts.",
+   "controls": "W A D: A D turn, W thrust\nUP LEFT RIGHT: the same\nSPACE: fire (hold for more), start",
    "cover": "../library/img/cover-orbit.webp",
    "machine": {
     "ram": 16,
@@ -156,7 +157,7 @@
    "about": "The classic, on a 40 x 25 text screen. Eat, grow, don't bite yourself.",
    "category": "game",
    "tags": [],
-   "controls": "W A S D or the cursor keys steer. SPACE starts.",
+   "controls": "W A S D: steer, hold two to turn twice\nUP LEFT DOWN RIGHT: or steer\nSPACE: start",
    "cover": "../library/img/cover-snake.webp",
    "machine": {
     "ram": 16,
@@ -185,6 +186,7 @@
    "about": "A house, a sun, a horizon: twenty lines of UNC BASIC on the bitmap. Type LIST to read them.",
    "category": "demo",
    "tags": [],
+   "instructions": "It draws itself. Then the machine is yours: type LIST to read the program, and change a line.",
    "machine": {
     "ram": 16,
     "niece": false

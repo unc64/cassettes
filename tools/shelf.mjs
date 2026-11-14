@@ -4,13 +4,14 @@
 //
 //   node tools/shelf.mjs inspect FILE.unc.png   the shelf's rules on a file; nothing is written
 //   node tools/shelf.mjs add FILE.unc.png [--id ID] [--category game|demo|music|tool|other]
-//        [--tags a,b] [--controls "A D move, SPACE fires"] [--featured] [--added 2026-11-14] [--discuss URL]
+//        [--tags a,b] [--controls "A D: move\nSPACE: fire"] [--instructions TEXT] [--featured] [--added 2026-11-14] [--discuss URL]
 //   node tools/shelf.mjs remove ID
 //   node tools/shelf.mjs build    after editing index.json by hand
 //   node tools/shelf.mjs check    fails if a cassette breaks a rule, or index.json isn't what build writes
 //
 // index.json holds two kinds of thing. The curation is yours to edit: id, file, category,
-// tags, controls, cover, featured, added, discuss. The rest is read from each cassette
+// tags, controls, instructions, cover, featured, added, discuss (controls and instructions
+// come from the cassette when the index doesn't say). The rest is read from each cassette
 // (title, author, about, machine, programs, bytes, width, height, source, lang) and
 // rewritten by build. The format: docs/cassettes.md in unc64/unc64, "The Portal's index".
 import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync, copyFileSync, readdirSync } from 'node:fs';
@@ -61,13 +62,24 @@ export function inspect(path) {
   return { cassette: c, bytes: bytes.length, width, height, programs };
 }
 
+// The keys and how to play: from the index if it says, else from the cassette itself
+// (`controls`, `instructions` in the format). Plain text, of a size a panel can hold.
+// The keys are a line each, `KEYS: what they do` (A D: move / UP DOWN LEFT RIGHT: steer).
+function text(name, v, most) {
+  if (typeof v !== 'string' || !v.trim()) return {};
+  const t = v.replace(/\r\n?/g, '\n').split('\n').map((l) => l.trim()).filter(Boolean).slice(0, 12).join('\n');
+  if (t.length > most) fail(`its ${name} are ${t.length} characters: ${most} at most`);
+  return { [name]: t };
+}
+
 function derive(entry) {
   const { cassette: c, bytes, width, height, programs } = inspect(join(ROOT, entry.file));
   const lang = programs[0].type === 2 || (c.main && /\.bas$/i.test(c.main)) ? 'basic' : 'asm';
   return {
     id: entry.id, file: entry.file, title: c.title, author: c.author, about: c.about,
     category: CATEGORIES[entry.category] ? entry.category : 'other', tags: entry.tags || [],
-    ...(entry.controls ? { controls: entry.controls } : {}),
+    ...text('controls', entry.controls ?? c.extra.controls, 400),
+    ...text('instructions', entry.instructions ?? c.extra.instructions, 800),
     ...(entry.cover ? { cover: entry.cover } : {}),
     machine: { ram: c.machine.ram, niece: !!c.machine.niece, ...(c.machine.aunt === false ? { aunt: false } : {}) },
     programs: programs.map((p) => ({ name: p.name, type: p.type, length: p.length })),
@@ -115,7 +127,7 @@ export function add(index, file, o = {}) {
   if (o.category && !CATEGORIES[o.category]) fail(`the category is one of ${Object.keys(CATEGORIES).join(', ')}`);
   const entry = {
     id, file: `cassettes/${id}.unc.png`, category: o.category || 'other', tags: o.tags ? String(o.tags).split(',').map((t) => t.trim()).filter(Boolean) : [],
-    ...(o.controls ? { controls: o.controls } : {}), featured: !!o.featured, added: o.added || new Date().toISOString().slice(0, 10), ...(o.discuss ? { discuss: o.discuss } : {}),
+    ...(o.controls ? { controls: String(o.controls).replace(/\\n/g, '\n') } : {}), ...(o.instructions ? { instructions: o.instructions } : {}), featured: !!o.featured, added: o.added || new Date().toISOString().slice(0, 10), ...(o.discuss ? { discuss: o.discuss } : {}),
   };
   mkdirSync(join(ROOT, 'cassettes'), { recursive: true });
   if (resolve(file) !== join(ROOT, entry.file)) copyFileSync(file, join(ROOT, entry.file));

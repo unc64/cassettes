@@ -29,14 +29,17 @@ const sorry = (why) => done({ ok: false, comment: `Thanks for sending this in. I
 // ---------- the form's answers: "### Label\n\nvalue" ----------
 const body = String(issue.body || '').replace(/\r\n/g, '\n');
 const field = (label) => {
-  const m = body.match(new RegExp(`^### ${label}\\s*\\n+([\\s\\S]*?)(?=\\n### |$)`, 'm'));
+  const m = body.match(new RegExp(`^### ${label}\\s*\\n+([\\s\\S]*?)(?=\\n### |(?![\\s\\S]))`, 'm')); // to the next heading, or the end
   const v = m ? m[1].trim() : '';
   return v === '_No response_' ? '' : v;
 };
 // plain text for a pull request: no markup, no mentions, one line
 const plain = (s, most = 200) => String(s).replace(/[`<>\[\]()*_~#|!\\]/g, ' ').replace(/@/g, '@ ').replace(/\s+/g, ' ').trim().slice(0, most);
 const kind = Object.keys(CATEGORIES).find((k) => CATEGORIES[k].toLowerCase() === field('Kind').toLowerCase()) || 'other';
-const controls = plain(field('The keys'), 160);
+// the keys a line each, how to play: as the form has them, else as the cassette carries them
+const lines = (s, most) => s.split('\n').map((l) => plain(l, 120)).filter(Boolean).slice(0, 12).join('\n').slice(0, most);
+const controls = lines(field('The keys'), 400);
+const instructions = lines(field('How to play'), 800);
 
 // ---------- the attachment ----------
 // A file dragged into an issue: github.com/user-attachments/assets/<uuid> (a picture) or
@@ -87,7 +90,7 @@ const taken = index.cassettes.find((e) => e.id === id && e.discuss !== issue.htm
 if (taken) id = `${id.slice(0, 34)}-${issue.number}`;
 let r;
 try {
-  r = add(index, file, { id, category: kind, controls, discuss: issue.html_url });
+  r = add(index, file, { id, category: kind, controls, instructions, discuss: issue.html_url });
   build(index);
 } catch (e) { sorry(e.message); }
 
@@ -109,7 +112,8 @@ done({
     '',
     '| | |', '|---|---|',
     `| Title | ${title} |`, `| By | ${by || '(nobody named)'} |`, `| About | ${plain(c.about, 600) || '(nothing)'} |`,
-    `| Kind | ${CATEGORIES[kind]} |`, `| Keys | ${controls || '(none given)'} |`, `| Needs | ${needs} |`,
+    `| Kind | ${CATEGORIES[kind]} |`, `| Keys | ${(controls || plain(c.extra.controls || '', 400) || '(none given)').replace(/\n/g, '<br>')} |`,
+    `| How to play | ${(instructions || plain(c.extra.instructions || '', 800) || '(nothing)').replace(/\n/g, ' ')} |`, `| Needs | ${needs} |`,
     `| On the tape | ${progs} |`, `| Source | ${c.files ? Object.keys(c.files).map((p) => plain(p, 60)).join(', ') : 'not included'} |`,
     `| File | \`cassettes/${id}.unc.png\`, ${info.bytes.toLocaleString('en')} bytes |`,
     '',
