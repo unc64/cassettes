@@ -115,6 +115,7 @@ done({
     `| Kind | ${CATEGORIES[kind]} |`, `| Keys | ${(controls || plain(c.extra.controls || '', 400) || '(none given)').replace(/\n/g, '<br>')} |`,
     `| How to play | ${(instructions || plain(c.extra.instructions || '', 800) || '(nothing)').replace(/\n/g, ' ')} |`, `| Needs | ${needs} |`,
     `| On the tape | ${progs} |`, `| Source | ${c.files ? Object.keys(c.files).map((p) => plain(p, 60)).join(', ') : 'not included'} |`,
+    `| Pictures | ${info.screenshots.length} screenshot${info.screenshots.length === 1 ? '' : 's'}${info.art ? ', and cover art' : ', no cover art'} |`,
     `| File | \`cassettes/${id}.unc.png\`, ${info.bytes.toLocaleString('en')} bytes |`,
     '',
     taken ? `**\`${slug(c.title)}\` is taken** by a cassette already on the shelf, so this one is \`${id}\`. If it's an update of that one by the same person, rename the file and the entry before merging.\n` : '',

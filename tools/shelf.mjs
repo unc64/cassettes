@@ -24,7 +24,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const INDEX = join(ROOT, 'index.json');
 export const CATEGORIES = { game: 'Game', demo: 'Demo', music: 'Music', tool: 'Tool', other: 'Other' };
 // names the Portal's own pages have
-const RESERVED = ['cassettes', 'submit', 'guidelines', 'try', 'index', 'assets', 'img', 'new', 'featured', 'api'];
+const RESERVED = ['cassettes', 'submit', 'guidelines', 'try', 'shots', 'covers', 'index', 'assets', 'img', 'new', 'featured', 'api'];
 const MAX_BYTES = 1024 * 1024;
 const MAX_ABOUT = 600;
 
@@ -61,7 +61,26 @@ export function inspect(path) {
   if (!c.title.trim() || c.title.length > 40) fail('the title is empty, or longer than 40 characters');
   if (c.about.length > MAX_ABOUT) fail(`the line about it is ${c.about.length} characters: ${MAX_ABOUT} at most`);
   if (c.author.length > 60) fail('the author is longer than 60 characters');
-  return { cassette: c, bytes: bytes.length, width, height, programs };
+  return { cassette: c, bytes: bytes.length, width, height, programs, screenshots: screenshots(c), art: c.extra.cover === undefined ? null : pictureOf(c.extra.cover, 'the cover') };
+}
+
+// The pictures a cassette carries: `screenshots`, up to four, and `cover`, its cover art;
+// each a PNG or a WebP of 200 KB at most, as base64. -> { ext, bytes }, or throws. Nothing
+// here opens a picture: the site copies them out as files (shots/<id>-<n>, covers/<id>).
+function pictureOf(b64, what) {
+  if (typeof b64 !== 'string' || b64.length > 280000 || !/^[A-Za-z0-9+/=\s]*$/.test(b64)) fail(`${what} isn't a picture of 200 KB or less`);
+  const bytes = Buffer.from(b64, 'base64');
+  const png = bytes.length > 24 && bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  const webp = bytes.length > 16 && bytes.toString('latin1', 0, 4) === 'RIFF' && bytes.toString('latin1', 8, 12) === 'WEBP';
+  if (!png && !webp) fail(`${what} must be a PNG or a WebP`);
+  if (bytes.length > 200 * 1024) fail(`${what} is over 200 KB`);
+  return { ext: png ? 'png' : 'webp', bytes };
+}
+function screenshots(c) {
+  const list = c.extra.screenshots;
+  if (list === undefined) return [];
+  if (!Array.isArray(list) || list.length > 4) fail('its screenshots must be a list of four at most');
+  return list.map((b64, i) => pictureOf(b64, `screenshot ${i + 1}`));
 }
 
 // The keys and how to play: from the index if it says, else from the cassette itself
@@ -75,15 +94,19 @@ function text(name, v, most) {
 }
 
 function derive(entry) {
-  const { cassette: c, bytes, width, height, programs } = inspect(join(ROOT, entry.file));
+  const { cassette: c, bytes, width, height, programs, screenshots: pics, art } = inspect(join(ROOT, entry.file));
+  // the cover: the site's own picture if the index names one, else the cassette's
+  const ours = entry.cover && !entry.cover.startsWith(`covers/${entry.id}.`) ? entry.cover : null;
+  const cover = ours || (art ? `covers/${entry.id}.${art.ext}` : null);
   const lang = programs[0].type === 2 || (c.main && /\.bas$/i.test(c.main)) ? 'basic' : 'asm';
   return {
     id: entry.id, file: entry.file, title: c.title, author: c.author, about: c.about,
     category: CATEGORIES[entry.category] ? entry.category : 'other', tags: entry.tags || [],
     ...text('controls', entry.controls ?? c.extra.controls, 400),
     ...text('instructions', entry.instructions ?? c.extra.instructions, 800),
-    ...(entry.cover ? { cover: entry.cover } : {}),
+    ...(cover ? { cover } : {}),
     ...(entry.shot ? { shot: entry.shot } : {}),
+    ...(pics.length ? { shots: pics.map((p, i) => `shots/${entry.id}-${i + 1}.${p.ext}`) } : {}),
     ...(entry.deck ? { deck: true } : {}),
     machine: { ram: c.machine.ram, niece: !!c.machine.niece, ...(c.machine.aunt === false ? { aunt: false } : {}) },
     programs: programs.map((p) => ({ name: p.name, type: p.type, length: p.length })),
