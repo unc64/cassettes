@@ -44,6 +44,12 @@ body:
     attributes:
       label: How to play
       description: If it needs saying. What you're trying to do, and anything that isn't obvious.
+  - type: input
+    id: source
+    attributes:
+      label: Source on GitHub
+      description: If the source is in a repository of yours, its link. "Read the source" on the Portal leads there, so a program can be as many files as it needs, and the cassette needn't carry them.
+      placeholder: https://github.com/you/your-game
   - type: textarea
     id: file
     attributes:

@@ -7,6 +7,7 @@ Three ways, the first the easiest. All of them end in a pull request that a pers
 1. Open **[unc64.com/portal/submit](https://unc64.com/portal/submit/)**.
 2. Drop your program on it: a `.unc.png` (the Machine Room's Export), a `.tap` (what the game's `SAVE` writes to `Documents/UNC 64/Cassettes`), a `.s` with its `.include`d files, or a `.bas`.
 3. Label it: title, who it's by, a line about it, its kind, what it needs (16K or 64K, the NIECE), the keys and, if it needs saying, how to play. The keys go a line each, `A D: move`, `UP DOWN LEFT RIGHT: steer`, `SPACE: fire`: the Portal shows them as keycaps beside the screen, and on a phone makes buttons of them. Both travel on the cassette.
+   If your source is in a GitHub repository of your own, give its link under **Source on GitHub**: "Read the source" on the Portal leads there, and the cassette needn't carry the source at all. (You can do both.)
    Add **screenshots** (up to four; the first is the picture on the label and on the shelf) and **cover art** if you've made some. With no screenshot, the page takes one of the screen itself. Leave **Put the source on the cassette** ticked if you'd like people to be able to open it and learn from it.
 4. Tick that it's yours to share, and press **Submit it**. The cassette downloads, and the form here opens with your answers in it.
 5. Drag the downloaded `.unc.png` into the form's last box, **The cassette**, and submit the issue. You need a GitHub account for this step. Without one, post the file in `#show-your-programs` on [the Discord](https://discord.gg/ZHHDqkFjw) and say it's for the Portal.
@@ -26,7 +27,8 @@ If you'd rather use git:
 ```sh
 git clone https://github.com/unc64/cassettes && cd cassettes
 node tools/shelf.mjs add ~/my-game.unc.png --category game \
-  --controls "A D: move\nSPACE: fire" --instructions "Shoot everything. Three lives."
+  --controls "A D: move\nSPACE: fire" --instructions "Shoot everything. Three lives." \
+  --source-url https://github.com/you/my-game
 node tools/shelf.mjs check
 ```
 
@@ -56,7 +58,7 @@ Yours, and you want it gone: [open an issue](https://github.com/unc64/cassettes/
 ## For the people who merge
 
 - Play it (the link in the pull request), and read it against the guidelines: theirs to share, says what it is, decent.
-- `category`, `tags`, `controls`, `instructions`, `featured`, `cover` and `shot` (pictures the site holds, for the featured few: without them a card shows the cassette's own face) and `deck` (`true` for a program that saves and loads on tape: the player then shows the deck's Rec and Play) in `index.json` are yours to edit on the branch; run `node tools/shelf.mjs build` after.
+- `category`, `tags`, `controls`, `instructions`, `source_url`, `featured`, `cover` and `shot` (pictures the site holds, for the featured few: without them a card shows the cassette's own face) and `deck` (`true` for a program that saves and loads on tape: the player then shows the deck's Rec and Play) in `index.json` are yours to edit on the branch; run `node tools/shelf.mjs build` after.
 - Merge. The Portal's site copies the shelf from here every hour (the `portal` workflow in the site's repository; run it by hand to hurry it).
 - `node tools/shelf.mjs remove ID` takes one off.
 - The bot needs **Settings, Actions, General, "Allow GitHub Actions to create and approve pull requests"**. Without it, it still pushes the branch `submission/<issue>` and says so.

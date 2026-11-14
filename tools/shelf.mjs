@@ -4,13 +4,14 @@
 //
 //   node tools/shelf.mjs inspect FILE.unc.png   the shelf's rules on a file; nothing is written
 //   node tools/shelf.mjs add FILE.unc.png [--id ID] [--category game|demo|music|tool|other]
-//        [--tags a,b] [--controls "A D: move\nSPACE: fire"] [--instructions TEXT] [--featured] [--added 2026-11-14] [--discuss URL]
+//        [--tags a,b] [--controls "A D: move\nSPACE: fire"] [--instructions TEXT] [--source-url https://github.com/you/game] [--featured] [--added 2026-11-14] [--discuss URL]
 //   node tools/shelf.mjs remove ID
 //   node tools/shelf.mjs build    after editing index.json by hand
 //   node tools/shelf.mjs check    fails if a cassette breaks a rule, or index.json isn't what build writes
 //
 // index.json holds two kinds of thing. The curation is yours to edit: id, file, category,
-// tags, controls, instructions, cover and shot (pictures the site holds: a card shows the
+// tags, controls, instructions, source_url (the author's own repository on GitHub, where
+// "Read the source" leads), cover and shot (pictures the site holds: a card shows the
 // screenshot with the cover on its corner, and the cassette's face without them), deck (it saves and loads: the
 // Portal's player shows the tape deck's Rec and Play), featured, added, discuss (controls and instructions
 // come from the cassette when the index doesn't say). The rest is read from each cassette
@@ -93,6 +94,16 @@ function text(name, v, most) {
   return { [name]: t };
 }
 
+// Where the source lives, if its author keeps it on GitHub: a repository, or a folder or a
+// file in one. From the index if it says, else from the cassette (`source_url` in the
+// format). Only github.com, so "Read the source" on the Portal never leads anywhere else.
+export function sourceURL(v) {
+  if (typeof v !== 'string' || !v.trim()) return {};
+  const u = v.trim();
+  if (u.length > 200 || !/^https:\/\/github\.com\/[A-Za-z0-9][A-Za-z0-9-]{0,38}\/[A-Za-z0-9._-]{1,100}(\/[A-Za-z0-9._~\/-]*)?$/.test(u) || u.includes('..')) fail('its source link must be a repository on github.com (https://github.com/you/your-game), or a folder or a file in one');
+  return { source_url: u };
+}
+
 function derive(entry) {
   const { cassette: c, bytes, width, height, programs, screenshots: pics, art } = inspect(join(ROOT, entry.file));
   // the cover: the site's own picture if the index names one, else the cassette's
@@ -104,6 +115,7 @@ function derive(entry) {
     category: CATEGORIES[entry.category] ? entry.category : 'other', tags: entry.tags || [],
     ...text('controls', entry.controls ?? c.extra.controls, 400),
     ...text('instructions', entry.instructions ?? c.extra.instructions, 800),
+    ...sourceURL(entry.source_url ?? c.extra.source_url),
     ...(cover ? { cover } : {}),
     ...(entry.shot ? { shot: entry.shot } : {}),
     ...(pics.length ? { shots: pics.map((p, i) => `shots/${entry.id}-${i + 1}.${p.ext}`) } : {}),
@@ -154,7 +166,7 @@ export function add(index, file, o = {}) {
   if (o.category && !CATEGORIES[o.category]) fail(`the category is one of ${Object.keys(CATEGORIES).join(', ')}`);
   const entry = {
     id, file: `cassettes/${id}.unc.png`, category: o.category || 'other', tags: o.tags ? String(o.tags).split(',').map((t) => t.trim()).filter(Boolean) : [],
-    ...(o.controls ? { controls: String(o.controls).replace(/\\n/g, '\n') } : {}), ...(o.instructions ? { instructions: o.instructions } : {}), featured: !!o.featured, added: o.added || new Date().toISOString().slice(0, 10), ...(o.discuss ? { discuss: o.discuss } : {}),
+    ...(o.controls ? { controls: String(o.controls).replace(/\\n/g, '\n') } : {}), ...(o.instructions ? { instructions: o.instructions } : {}), ...(o['source-url'] ? { source_url: o['source-url'] } : {}), featured: !!o.featured, added: o.added || new Date().toISOString().slice(0, 10), ...(o.discuss ? { discuss: o.discuss } : {}),
   };
   mkdirSync(join(ROOT, 'cassettes'), { recursive: true });
   if (resolve(file) !== join(ROOT, entry.file)) copyFileSync(file, join(ROOT, entry.file));

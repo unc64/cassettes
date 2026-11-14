@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readIndex, add, build, slug, inspect, CATEGORIES } from './shelf.mjs';
+import { readIndex, add, build, built, slug, inspect, sourceURL, CATEGORIES } from './shelf.mjs';
 
 const MAX = 1100 * 1024;
 const dry = process.argv[2] === '--dry';
@@ -40,6 +40,9 @@ const kind = Object.keys(CATEGORIES).find((k) => CATEGORIES[k].toLowerCase() ===
 const lines = (s, most) => s.split('\n').map((l) => plain(l, 120)).filter(Boolean).slice(0, 12).join('\n').slice(0, most);
 const controls = lines(field('The keys'), 400);
 const instructions = lines(field('How to play'), 800);
+// the author's own repository, if they gave one: a link on github.com, or nothing
+let source = field('Source on GitHub').split(/\s/)[0] || '';
+try { sourceURL(source); } catch (e) { source = ''; }
 
 // ---------- the attachment ----------
 // A file dragged into an issue: github.com/user-attachments/assets/<uuid> (a picture) or
@@ -90,11 +93,13 @@ const taken = index.cassettes.find((e) => e.id === id && e.discuss !== issue.htm
 if (taken) id = `${id.slice(0, 34)}-${issue.number}`;
 let r;
 try {
-  r = add(index, file, { id, category: kind, controls, instructions, discuss: issue.html_url });
+  r = add(index, file, { id, category: kind, controls, instructions, 'source-url': source, discuss: issue.html_url });
   build(index);
 } catch (e) { sorry(e.message); }
 
 const c = info.cassette;
+// the link as the shelf took it (the form's, else the cassette's own)
+const shown = index.cassettes.find((e) => e.id === id)?.source_url || built(index).list.find((e) => e.id === id)?.source_url || '';
 const title = plain(c.title, 60);
 const by = plain(c.author, 60);
 const branch = `submission/${issue.number}`;
@@ -114,7 +119,7 @@ done({
     `| Title | ${title} |`, `| By | ${by || '(nobody named)'} |`, `| About | ${plain(c.about, 600) || '(nothing)'} |`,
     `| Kind | ${CATEGORIES[kind]} |`, `| Keys | ${(controls || plain(c.extra.controls || '', 400) || '(none given)').replace(/\n/g, '<br>')} |`,
     `| How to play | ${(instructions || plain(c.extra.instructions || '', 800) || '(nothing)').replace(/\n/g, ' ')} |`, `| Needs | ${needs} |`,
-    `| On the tape | ${progs} |`, `| Source | ${c.files ? Object.keys(c.files).map((p) => plain(p, 60)).join(', ') : 'not included'} |`,
+    `| On the tape | ${progs} |`, `| Source | ${c.files ? `on the cassette: ${Object.keys(c.files).map((p) => plain(p, 60)).join(', ')}` : 'not on the cassette'}${shown ? `; linked: ${shown}` : ''} |`,
     `| Pictures | ${info.screenshots.length} screenshot${info.screenshots.length === 1 ? '' : 's'}${info.art ? ', and cover art' : ', no cover art'} |`,
     `| File | \`cassettes/${id}.unc.png\`, ${info.bytes.toLocaleString('en')} bytes |`,
     '',

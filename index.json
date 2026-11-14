@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:26:17Z",
+ "updated": "2026-11-14T17:40:13Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -12,6 +12,7 @@
    "category": "game",
    "tags": [],
    "controls": "A D: run\nLEFT RIGHT: or run\nSPACE: jump, hold for higher; start",
+   "source_url": "https://github.com/unc64/unc64/tree/main/games",
    "cover": "covers/cloudberry.webp",
    "shots": [
     "shots/cloudberry-1.webp"
@@ -44,6 +45,7 @@
    "category": "game",
    "tags": [],
    "controls": "A D: move\nLEFT RIGHT: or move\nSPACE: fire (hold for more), start",
+   "source_url": "https://github.com/unc64/unc64/blob/main/games/debug.s",
    "cover": "covers/debug.webp",
    "shots": [
     "shots/debug-1.webp"
@@ -76,6 +78,7 @@
    "category": "game",
    "tags": [],
    "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
+   "source_url": "https://github.com/unc64/unc64/tree/main/games",
    "cover": "covers/fellrider.webp",
    "shots": [
     "shots/fellrider-1.webp"
@@ -109,6 +112,7 @@
    "tags": [],
    "controls": "RETURN: play\nSPACE: stop\nT: next tune\nZ-M: piano, stopped\nI: instruments\n?: all the keys",
    "instructions": "Four tunes are on the tape: press RETURN. Then stop it, write your own, and save it to tape with the deck's Rec.",
+   "source_url": "https://github.com/unc64/unc64/tree/main/games",
    "cover": "covers/music-tracker.webp",
    "shots": [
     "shots/music-tracker-1.webp"
@@ -142,6 +146,7 @@
    "category": "game",
    "tags": [],
    "controls": "W A D: A D turn, W thrust\nUP LEFT RIGHT: the same\nSPACE: fire (hold for more), start",
+   "source_url": "https://github.com/unc64/unc64/blob/main/games/orbit.s",
    "cover": "covers/orbit.webp",
    "shots": [
     "shots/orbit-1.webp"
@@ -174,6 +179,7 @@
    "category": "game",
    "tags": [],
    "controls": "W A S D: steer, hold two to turn twice\nUP LEFT DOWN RIGHT: or steer\nSPACE: start",
+   "source_url": "https://github.com/unc64/unc64/blob/main/games/snake.s",
    "cover": "covers/snake.webp",
    "shots": [
     "shots/snake-1.webp"
@@ -206,6 +212,7 @@
    "category": "game",
    "tags": [],
    "controls": "A D: move\nW: rotate\nS: soft drop\nLEFT RIGHT UP DOWN: the same\nSPACE: hard drop, start",
+   "source_url": "https://github.com/unc64/unc64/blob/main/games/stack.s",
    "cover": "covers/stack.webp",
    "shots": [
     "shots/stack-1.webp"
@@ -239,6 +246,7 @@
    "category": "demo",
    "tags": [],
    "instructions": "It draws itself. Then the machine is yours: type LIST to read the program, and change a line.",
+   "source_url": "https://github.com/unc64/unc64/tree/main/web/samples",
    "shots": [
     "shots/sun-1.png"
    ],
