@@ -40,7 +40,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git checkout -q -B "$branch"
-            git add cassettes index.json source
+            git add cassettes index.json
             jq -r .commit "$r" > "$RUNNER_TEMP/commit.txt"
             git commit -q -F "$RUNNER_TEMP/commit.txt"
             git push -q --force origin "$branch"

@@ -114,7 +114,7 @@ done({
     `| Title | ${title} |`, `| By | ${by || '(nobody named)'} |`, `| About | ${plain(c.about, 600) || '(nothing)'} |`,
     `| Kind | ${CATEGORIES[kind]} |`, `| Keys | ${(controls || plain(c.extra.controls || '', 400) || '(none given)').replace(/\n/g, '<br>')} |`,
     `| How to play | ${(instructions || plain(c.extra.instructions || '', 800) || '(nothing)').replace(/\n/g, ' ')} |`, `| Needs | ${needs} |`,
-    `| On the tape | ${progs} |`, `| Source | ${c.files ? `[${Object.keys(c.files).length} file${Object.keys(c.files).length === 1 ? '' : 's'}](https://github.com/unc64/cassettes/tree/${branch}/source/${id}): ${Object.keys(c.files).map((p) => plain(p, 60)).join(', ')}` : 'not included'} |`,
+    `| On the tape | ${progs} |`, `| Source | ${c.files ? Object.keys(c.files).map((p) => plain(p, 60)).join(', ') : 'not included'} |`,
     `| Pictures | ${info.screenshots.length} screenshot${info.screenshots.length === 1 ? '' : 's'}${info.art ? ', and cover art' : ', no cover art'} |`,
     `| File | \`cassettes/${id}.unc.png\`, ${info.bytes.toLocaleString('en')} bytes |`,
     '',

@@ -15,8 +15,7 @@
 // Portal's player shows the tape deck's Rec and Play), featured, added, discuss (controls and instructions
 // come from the cassette when the index doesn't say). The rest is read from each cassette
 // (title, author, about, machine, programs, bytes, width, height, source, lang) and
-// rewritten by build, as is source/<id>/: each cassette's own source files, laid out to be
-// read here. The format: docs/cassettes.md in unc64/unc64, "The Portal's index".
+// rewritten by build. The format: docs/cassettes.md in unc64/unc64, "The Portal's index".
 import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync, copyFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -62,13 +61,6 @@ export function inspect(path) {
   if (!c.title.trim() || c.title.length > 40) fail('the title is empty, or longer than 40 characters');
   if (c.about.length > MAX_ABOUT) fail(`the line about it is ${c.about.length} characters: ${MAX_ABOUT} at most`);
   if (c.author.length > 60) fail('the author is longer than 60 characters');
-  // its source, if it carries any: plain names, of a size a person would read
-  const files = Object.entries(c.files || {});
-  if (files.length > 40) fail(`it carries ${files.length} source files: 40 at most`);
-  for (const [path, body] of files) {
-    if (!/^[A-Za-z0-9_][A-Za-z0-9._-]{0,59}(\/[A-Za-z0-9_][A-Za-z0-9._-]{0,59}){0,3}$/.test(path)) fail(`a source file is called "${path.slice(0, 80)}": letters, digits, . _ and - only, in at most three folders`);
-    if (body.length > 256 * 1024) fail(`${path} is over 256 KB`);
-  }
   return { cassette: c, bytes: bytes.length, width, height, programs, screenshots: screenshots(c), art: c.extra.cover === undefined ? null : pictureOf(c.extra.cover, 'the cover') };
 }
 
@@ -125,27 +117,6 @@ function derive(entry) {
 }
 const order = (list) => [...list].sort((a, b) => (b.featured - a.featured) || b.added.localeCompare(a.added) || a.title.localeCompare(b.title));
 
-// The source each cassette carries, laid out as files: source/<id>/<its files>. It's what
-// "Read the source" on the Portal links to, here on GitHub. Written by build from the
-// cassettes themselves, so it can't drift from them: don't edit it.
-function sources(list) {
-  const out = new Map();
-  for (const e of list) {
-    const c = C.read(new Uint8Array(readFileSync(join(ROOT, e.file))), e.file);
-    for (const [path, body] of Object.entries(c.files || {})) out.set(`source/${e.id}/${path}`, body);
-  }
-  return out;
-}
-function walk(dir, base = dir) {
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory() ? walk(join(dir, d.name), base) : [join(dir, d.name).slice(base.length + 1).split('\\').join('/')]));
-}
-// -> the paths that differ from what the cassettes say (missing, changed, or left over)
-function staleSources(want) {
-  const have = walk(join(ROOT, 'source')).map((p) => `source/${p}`);
-  return [...[...want].filter(([p, body]) => !existsSync(join(ROOT, p)) || readFileSync(join(ROOT, p), 'utf8') !== body).map(([p]) => p), ...have.filter((p) => !want.has(p))];
-}
-
 // index.json as build writes it, or throws with every problem found.
 export function built(index) {
   const errors = [];
@@ -171,15 +142,8 @@ export function built(index) {
 }
 export function build(index) {
   const { text, list } = built(index);
-  let changed = !existsSync(INDEX) || readFileSync(INDEX, 'utf8') !== text;
+  const changed = !existsSync(INDEX) || readFileSync(INDEX, 'utf8') !== text;
   if (changed) writeFileSync(INDEX, text);
-  const want = sources(list);
-  for (const p of staleSources(want)) {
-    changed = true;
-    if (want.has(p)) { mkdirSync(dirname(join(ROOT, p)), { recursive: true }); writeFileSync(join(ROOT, p), want.get(p)); } else rmSync(join(ROOT, p));
-  }
-  // a folder left empty by a cassette that's gone
-  for (const d of existsSync(join(ROOT, 'source')) ? readdirSync(join(ROOT, 'source')) : []) if (!walk(join(ROOT, 'source', d)).length) rmSync(join(ROOT, 'source', d), { recursive: true });
   return { list, changed };
 }
 
@@ -213,7 +177,7 @@ function flags(args) {
 function main() {
   const [cmd, ...rest] = process.argv.slice(2);
   const index = readIndex();
-  const say = (r) => console.log(`The shelf: ${r.list.length} cassettes${r.changed ? '; wrote index.json and source/' : '; nothing changed'}.`);
+  const say = (r) => console.log(`The shelf: ${r.list.length} cassettes${r.changed ? '; wrote index.json' : '; nothing changed'}.`);
   if (cmd === 'inspect') {
     for (const f of rest) { const i = inspect(f); console.log(`${f}: ${i.cassette.title}${i.cassette.author ? ` by ${i.cassette.author}` : ''}, in order.`); }
   } else if (cmd === 'add') {
@@ -231,8 +195,6 @@ function main() {
   else if (cmd === 'check') {
     const { text, list } = built(index);
     if (readFileSync(INDEX, 'utf8') !== text) fail('index.json is stale: run `node tools/shelf.mjs build`.');
-    const off = staleSources(sources(list));
-    if (off.length) fail(`source/ isn't what the cassettes carry (${off.slice(0, 5).join(', ')}): run \`node tools/shelf.mjs build\`.`);
     console.log(`The shelf: ${list.length} cassettes, all in order.`);
   } else fail('usage: node tools/shelf.mjs inspect FILE | add FILE ... | remove ID | build | check');
 }
