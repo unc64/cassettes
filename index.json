@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:06:05Z",
+ "updated": "2026-11-14T17:09:37Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -13,6 +13,7 @@
    "tags": [],
    "controls": "A D: run\nLEFT RIGHT: or run\nSPACE: jump, hold for higher; start",
    "cover": "../library/img/cover-cloudberry.webp",
+   "shot": "../library/img/cloudberry.webp",
    "machine": {
     "ram": 64,
     "niece": true
@@ -42,6 +43,7 @@
    "tags": [],
    "controls": "A D: move\nLEFT RIGHT: or move\nSPACE: fire (hold for more), start",
    "cover": "../library/img/cover-debug.webp",
+   "shot": "../library/img/debug.webp",
    "machine": {
     "ram": 16,
     "niece": false
@@ -71,6 +73,7 @@
    "tags": [],
    "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
    "cover": "../library/img/cover-fellrider.webp",
+   "shot": "../library/img/fellrider.webp",
    "machine": {
     "ram": 64,
     "niece": true
@@ -101,6 +104,7 @@
    "controls": "RETURN: play\nSPACE: stop\nT: next tune\nZ-M: piano, stopped\nI: instruments\n?: all the keys",
    "instructions": "Four tunes are on the tape: press RETURN. Then stop it, write your own, and save it to tape with the deck's Rec.",
    "cover": "../library/img/cover-tracker.webp",
+   "shot": "../library/img/tracker.webp",
    "deck": true,
    "machine": {
     "ram": 16,
@@ -131,6 +135,7 @@
    "tags": [],
    "controls": "W A D: A D turn, W thrust\nUP LEFT RIGHT: the same\nSPACE: fire (hold for more), start",
    "cover": "../library/img/cover-orbit.webp",
+   "shot": "../library/img/orbit.webp",
    "machine": {
     "ram": 16,
     "niece": false
@@ -160,6 +165,7 @@
    "tags": [],
    "controls": "W A S D: steer, hold two to turn twice\nUP LEFT DOWN RIGHT: or steer\nSPACE: start",
    "cover": "../library/img/cover-snake.webp",
+   "shot": "../library/img/snake.webp",
    "machine": {
     "ram": 16,
     "niece": false
