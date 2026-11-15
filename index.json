@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-14T17:48:32Z",
+ "updated": "2026-11-15T15:02:23Z",
  "cassettes": [
   {
    "id": "cloudberry",
@@ -208,6 +208,40 @@
    "added": "2026-11-14",
    "featured": true,
    "order": 6
+  },
+  {
+   "id": "salvo",
+   "file": "cassettes/salvo.unc.png",
+   "title": "SALVO",
+   "author": "LAURI",
+   "about": "A battle of tanks, in turns, against the machine. Five tanks a side and five moves a turn: drive, fire, or buy another tank. Collect the coins, mend at the spanners, and leave the enemy with none.",
+   "category": "game",
+   "tags": [],
+   "controls": "UP DOWN LEFT RIGHT: move the cursor\nSPACE: pick a tank; drive to a dotted square; fire at a tank in reverse\nN: your next tank\nB: buy a tank, $4,000\nRETURN: end your turn",
+   "instructions": "Yours are the solid tanks. A turn is five moves, for any of your tanks: a move a square driven (three at most at a time), a move a shot, a move and $4,000 a new tank. A shot reaches three squares if no tank is in the way, and three hits destroy a tank. Drive over a coin for $2,000 and over a spanner to repair. Destroy every enemy tank.",
+   "shots": [
+    "shots/salvo-1.png",
+    "shots/salvo-2.png",
+    "shots/salvo-3.png"
+   ],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "SALVO",
+     "type": 1,
+     "length": 6421
+    }
+   ],
+   "bytes": 214203,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-15",
+   "featured": false
   },
   {
    "id": "debug",
