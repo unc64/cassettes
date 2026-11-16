@@ -1,21 +1,21 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-15T15:02:23Z",
+ "updated": "2026-11-16T13:29:39Z",
  "cassettes": [
   {
-   "id": "cloudberry",
-   "file": "cassettes/cloudberry.unc.png",
-   "title": "CLOUDBERRY",
+   "id": "fellrider",
+   "file": "cassettes/fellrider.unc.png",
+   "title": "FELLRIDER",
    "author": "United Northern Computers",
-   "about": "Late summer on the fells. Run and jump across bog, birch wood and stones for cloudberries, to the hut at the end.",
+   "about": "A moped over the fells, as far as it will go. Pick up the coins and the gas cans.",
    "category": "game",
    "tags": [],
-   "controls": "A D: run\nLEFT RIGHT: or run\nSPACE: jump, hold for higher; start",
+   "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
    "source_url": "https://github.com/unc64/unc64/tree/main/games",
-   "cover": "covers/cloudberry.webp",
+   "cover": "covers/fellrider.webp",
    "shots": [
-    "shots/cloudberry-1.webp"
+    "shots/fellrider-1.webp"
    ],
    "machine": {
     "ram": 64,
@@ -23,12 +23,12 @@
    },
    "programs": [
     {
-     "name": "CLOUDBERRY",
+     "name": "FELLRIDER",
      "type": 1,
-     "length": 21002
+     "length": 14080
     }
    ],
-   "bytes": 456721,
+   "bytes": 394165,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -74,18 +74,18 @@
    "order": 2
   },
   {
-   "id": "fellrider",
-   "file": "cassettes/fellrider.unc.png",
-   "title": "FELLRIDER",
+   "id": "cloudberry",
+   "file": "cassettes/cloudberry.unc.png",
+   "title": "CLOUDBERRY",
    "author": "United Northern Computers",
-   "about": "A moped over the fells, as far as it will go. Pick up the coins and the gas cans.",
+   "about": "Late summer on the fells. Run and jump across bog, birch wood and stones for cloudberries, to the hut at the end.",
    "category": "game",
    "tags": [],
-   "controls": "W A S D: D gas, A brake, W lean back, S lean forward\nUP LEFT DOWN RIGHT: the same\nSPACE: start",
+   "controls": "A D: run\nLEFT RIGHT: or run\nSPACE: jump, hold for higher; start",
    "source_url": "https://github.com/unc64/unc64/tree/main/games",
-   "cover": "covers/fellrider.webp",
+   "cover": "covers/cloudberry.webp",
    "shots": [
-    "shots/fellrider-1.webp"
+    "shots/cloudberry-1.webp"
    ],
    "machine": {
     "ram": 64,
@@ -93,12 +93,12 @@
    },
    "programs": [
     {
-     "name": "FELLRIDER",
+     "name": "CLOUDBERRY",
      "type": 1,
-     "length": 14080
+     "length": 21002
     }
    ],
-   "bytes": 394165,
+   "bytes": 456721,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -108,18 +108,19 @@
    "order": 3
   },
   {
-   "id": "snake",
-   "file": "cassettes/snake.unc.png",
-   "title": "SNAKE",
-   "author": "United Northern Computers",
-   "about": "The classic, on a 40 x 25 text screen. Eat, grow, don't bite yourself.",
+   "id": "salvo",
+   "file": "cassettes/salvo.unc.png",
+   "title": "SALVO",
+   "author": "LAURI",
+   "about": "A battle of tanks, in turns, against the machine. Five tanks a side and five moves a turn: drive, fire, or buy another tank. Collect the coins, mend at the spanners, and leave the enemy with none.",
    "category": "game",
    "tags": [],
-   "controls": "W A S D: steer, hold two to turn twice\nUP LEFT DOWN RIGHT: or steer\nSPACE: start",
-   "source_url": "https://github.com/unc64/unc64/blob/main/games/snake.s",
-   "cover": "covers/snake.webp",
+   "controls": "UP DOWN LEFT RIGHT: move the cursor\nSPACE: pick a tank; drive to a dotted square; fire at a tank in reverse\nN: your next tank\nB: buy a tank, $4,000\nRETURN: end your turn",
+   "instructions": "Yours are the solid tanks. A turn is five moves, for any of your tanks: a move a square driven (three at most at a time), a move a shot, a move and $4,000 a new tank. A shot reaches three squares if no tank is in the way, and three hits destroy a tank. Drive over a coin for $2,000 and over a spanner to repair. Destroy every enemy tank.",
    "shots": [
-    "shots/snake-1.webp"
+    "shots/salvo-1.png",
+    "shots/salvo-2.png",
+    "shots/salvo-3.png"
    ],
    "machine": {
     "ram": 16,
@@ -127,17 +128,17 @@
    },
    "programs": [
     {
-     "name": "SNAKE",
+     "name": "SALVO",
      "type": 1,
-     "length": 1715
+     "length": 6421
     }
    ],
-   "bytes": 204733,
+   "bytes": 214203,
    "width": 1004,
    "height": 638,
    "source": true,
    "lang": "asm",
-   "added": "2026-11-14",
+   "added": "2026-11-15",
    "featured": true,
    "order": 4
   },
@@ -210,40 +211,6 @@
    "order": 6
   },
   {
-   "id": "salvo",
-   "file": "cassettes/salvo.unc.png",
-   "title": "SALVO",
-   "author": "LAURI",
-   "about": "A battle of tanks, in turns, against the machine. Five tanks a side and five moves a turn: drive, fire, or buy another tank. Collect the coins, mend at the spanners, and leave the enemy with none.",
-   "category": "game",
-   "tags": [],
-   "controls": "UP DOWN LEFT RIGHT: move the cursor\nSPACE: pick a tank; drive to a dotted square; fire at a tank in reverse\nN: your next tank\nB: buy a tank, $4,000\nRETURN: end your turn",
-   "instructions": "Yours are the solid tanks. A turn is five moves, for any of your tanks: a move a square driven (three at most at a time), a move a shot, a move and $4,000 a new tank. A shot reaches three squares if no tank is in the way, and three hits destroy a tank. Drive over a coin for $2,000 and over a spanner to repair. Destroy every enemy tank.",
-   "shots": [
-    "shots/salvo-1.png",
-    "shots/salvo-2.png",
-    "shots/salvo-3.png"
-   ],
-   "machine": {
-    "ram": 16,
-    "niece": false
-   },
-   "programs": [
-    {
-     "name": "SALVO",
-     "type": 1,
-     "length": 6421
-    }
-   ],
-   "bytes": 214203,
-   "width": 1004,
-   "height": 638,
-   "source": true,
-   "lang": "asm",
-   "added": "2026-11-15",
-   "featured": false
-  },
-  {
    "id": "debug",
    "file": "cassettes/debug.unc.png",
    "title": "DEBUG",
@@ -269,6 +236,39 @@
     }
    ],
    "bytes": 275770,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-14",
+   "featured": false
+  },
+  {
+   "id": "snake",
+   "file": "cassettes/snake.unc.png",
+   "title": "SNAKE",
+   "author": "United Northern Computers",
+   "about": "The classic, on a 40 x 25 text screen. Eat, grow, don't bite yourself.",
+   "category": "game",
+   "tags": [],
+   "controls": "W A S D: steer, hold two to turn twice\nUP LEFT DOWN RIGHT: or steer\nSPACE: start",
+   "source_url": "https://github.com/unc64/unc64/blob/main/games/snake.s",
+   "cover": "covers/snake.webp",
+   "shots": [
+    "shots/snake-1.webp"
+   ],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "SNAKE",
+     "type": 1,
+     "length": 1715
+    }
+   ],
+   "bytes": 204733,
    "width": 1004,
    "height": 638,
    "source": true,
