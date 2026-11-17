@@ -11,7 +11,7 @@
 //
 // index.json holds two kinds of thing. The curation is yours to edit: id, file, category,
 // tags, controls, instructions, source_url (the author's own repository on GitHub, where
-// "Read the source" leads), cover and shot (pictures the site holds: a card shows the
+// "Read the source" leads for a cassette that carries no source), cover and shot (pictures the site holds: a card shows the
 // screenshot with the cover on its corner, and the cassette's face without them), order (its place in the front row, for a featured one), deck (it saves and loads: the
 // Portal's player shows the tape deck's Rec and Play), featured, added, discuss (controls and instructions
 // come from the cassette when the index doesn't say). The rest is read from each cassette
@@ -105,6 +105,8 @@ function text(name, v, most) {
 // Where the source lives, if its author keeps it on GitHub: a repository, or a folder or a
 // file in one. From the index if it says, else from the cassette (`source_url` in the
 // format). Only github.com, so "Read the source" on the Portal never leads anywhere else.
+// The Portal uses it only for a cassette that carries no source: one that does leads to its
+// own files here, source/<id>/.
 export function sourceURL(v) {
   if (typeof v !== 'string' || !v.trim()) return {};
   const u = v.trim();
@@ -140,7 +142,8 @@ function derive(entry) {
 const order = (list) => [...list].sort((a, b) => (b.featured - a.featured) || ((a.order ?? 999) - (b.order ?? 999)) || b.added.localeCompare(a.added) || a.title.localeCompare(b.title));
 
 // The source each cassette carries, laid out as files: source/<id>/<its files>. It's what
-// "Read the source" on the Portal links to, here on GitHub. Written by build from the
+// "Read the source" on the Portal links to, here on GitHub (the file the cassette runs
+// from), whether or not its author gave a link of their own. Written by build from the
 // cassettes themselves, so it can't drift from them: don't edit it.
 function sources(list) {
   const out = new Map();
