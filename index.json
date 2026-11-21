@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-21T15:23:56Z",
+ "updated": "2026-11-21T15:32:16Z",
  "cassettes": [
   {
    "id": "fellrider",
@@ -255,6 +255,7 @@
    "tags": [],
    "controls": "SPACE: stop the row\nRETURN: take the minor prize",
    "instructions": "A row of blocks slides from side to side: SPACE stops it, and the next starts above, faster. Blocks stay only where there's a block under them, and the next row is as short as what was kept. Miss the tower and the game is over. At row 11, RETURN takes the minor prize, 1,000 points, and starts the next round; SPACE goes on for the major prize at the top, 5,000.",
+   "cover": "covers/highrise.webp",
    "shots": [
     "shots/highrise-1.png",
     "shots/highrise-2.png",
@@ -271,7 +272,7 @@
      "length": 1949
     }
    ],
-   "bytes": 168730,
+   "bytes": 278565,
    "width": 1004,
    "height": 638,
    "source": true,
