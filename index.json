@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-21T13:50:49Z",
+ "updated": "2026-11-21T14:09:21Z",
  "cassettes": [
   {
    "id": "fellrider",
@@ -204,6 +204,42 @@
    "added": "2026-11-14",
    "featured": true,
    "order": 6
+  },
+  {
+   "id": "deephold",
+   "file": "cassettes/deephold.unc.png",
+   "title": "DEEPHOLD",
+   "author": "United Northern Computers",
+   "about": "A small text adventure in UNC BASIC: a cabin, a lamp, a troll, three treasures, and a dark that bites. Two-word commands.",
+   "category": "game",
+   "tags": [
+    "adventure",
+    "text",
+    "basic"
+   ],
+   "controls": "Type a command, then RETURN\nN S E W U D: move\nHELP: the words it knows",
+   "instructions": "Find the three treasures under the cabin and lay them in the oak chest. Carry a light. It knows a word by its first three letters: LOOK, INVENTORY, TAKE, DROP, OPEN, EXAMINE, SCORE.",
+   "shots": [
+    "shots/deephold-1.png"
+   ],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "DEEPHOLD",
+     "type": 2,
+     "length": 8840
+    }
+   ],
+   "bytes": 167115,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "basic",
+   "added": "2026-11-21",
+   "featured": false
   },
   {
    "id": "highrise",
