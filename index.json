@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-16T13:29:39Z",
+ "updated": "2026-11-21T13:22:19Z",
  "cassettes": [
   {
    "id": "fellrider",
@@ -204,6 +204,39 @@
    "added": "2026-11-14",
    "featured": true,
    "order": 6
+  },
+  {
+   "id": "highrise",
+   "file": "cassettes/highrise.unc.png",
+   "title": "HIGHRISE",
+   "author": "",
+   "about": "Stop the sliding row on the tower, fifteen rows up. What overhangs falls off. Take the minor prize at row 11, or go on for the major one.",
+   "category": "game",
+   "tags": [],
+   "controls": "SPACE: stop the row\nRETURN: take the minor prize",
+   "instructions": "A row of blocks slides from side to side: SPACE stops it, and the next starts above, faster. Blocks stay only where there's a block under them, and the next row is as short as what was kept. Miss the tower and the game is over. At row 11, RETURN takes the minor prize, 1,000 points, and starts the next round; SPACE goes on for the major prize at the top, 5,000.",
+   "shots": [
+    "shots/highrise-1.png",
+    "shots/highrise-2.png"
+   ],
+   "machine": {
+    "ram": 16,
+    "niece": false
+   },
+   "programs": [
+    {
+     "name": "HIGHRISE",
+     "type": 1,
+     "length": 1949
+    }
+   ],
+   "bytes": 142155,
+   "width": 1004,
+   "height": 638,
+   "source": true,
+   "lang": "asm",
+   "added": "2026-11-21",
+   "featured": false
   },
   {
    "id": "debug",
