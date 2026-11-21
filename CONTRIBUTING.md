@@ -60,7 +60,7 @@ Yours, and you want it gone: [open an issue](https://github.com/unc64/cassettes/
 
 - Play it (the link in the pull request), and read it against the guidelines: theirs to share, says what it is, decent.
 - The front row is the cassettes with `"featured": true`, in the order their `"order"` gives (1, 2, 3...); the first is the one the Portal opens with.
-- `category`, `tags`, `controls`, `instructions`, `source_url`, `featured`, `cover` and `shot` (pictures the site holds, for the featured few: without them a card shows the cassette's own face) and `deck` (`true` for a program that saves and loads on tape: the player then shows the deck's Rec and Play) in `index.json` are yours to edit on the branch; run `node tools/shelf.mjs build` after.
+- `category`, `tags`, `controls`, `instructions`, `source_url`, `featured`, `cover` and `shot` (pictures the site holds, for the featured few: without them a card shows the cassette's own face) and `deck` (`true` for a program that saves and loads on tape: the player then shows the deck's Rec and Play) and `keyboard` (`true` for a program that's typed to, a text adventure say: on a phone the player then offers the phone's own keyboard in place of on-screen keys) in `index.json` are yours to edit on the branch; run `node tools/shelf.mjs build` after.
 - Merge. The Portal's site copies the shelf from here every hour (the `portal` workflow in the site's repository; run it by hand to hurry it).
 - `node tools/shelf.mjs remove ID` takes one off.
 - The bot needs **Settings, Actions, General, "Allow GitHub Actions to create and approve pull requests"**. Without it, it still pushes the branch `submission/<issue>` and says so.

@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-21T15:03:55Z",
+ "updated": "2026-11-21T15:04:41Z",
  "cassettes": [
   {
    "id": "fellrider",
@@ -217,13 +217,13 @@
     "text",
     "basic"
    ],
-   "controls": "Type a command, then RETURN\nN S E W U D: move\nHELP: the words it knows",
-   "instructions": "Find the three treasures under the cabin and lay them in the oak chest. Carry a light. It knows a word by its first three letters: LOOK, INVENTORY, TAKE, DROP, OPEN, EXAMINE, SCORE. The manual, MANUAL.md, is with the source.",
+   "instructions": "Type what you want to do, a word or two, and press RETURN: N, S, E, W, U and D move, HELP lists the words. Find the three treasures under the cabin and lay them in the oak chest. Carry a light. It knows a word by its first three letters. The manual, MANUAL.md, is with the source.",
    "shots": [
     "shots/deephold-1.png",
     "shots/deephold-2.png",
     "shots/deephold-3.png"
    ],
+   "keyboard": true,
    "machine": {
     "ram": 16,
     "niece": false
@@ -235,7 +235,7 @@
      "length": 8840
     }
    ],
-   "bytes": 193166,
+   "bytes": 193136,
    "width": 1004,
    "height": 638,
    "source": true,
