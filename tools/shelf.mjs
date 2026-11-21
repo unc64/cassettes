@@ -27,7 +27,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const INDEX = join(ROOT, 'index.json');
 export const CATEGORIES = { game: 'Game', demo: 'Demo', music: 'Music', tool: 'Tool', other: 'Other' };
 // names the Portal's own pages have
-const RESERVED = ['cassettes', 'submit', 'guidelines', 'try', 'shots', 'covers', 'index', 'assets', 'img', 'new', 'featured', 'api'];
+const RESERVED = ['cassettes', 'submit', 'guidelines', 'try', 'shots', 'covers', 'manuals', 'index', 'assets', 'img', 'new', 'featured', 'api'];
 const MAX_BYTES = 1024 * 1024;
 const MAX_ABOUT = 600;
 
@@ -71,7 +71,7 @@ export function inspect(path) {
     if (!/^[A-Za-z0-9_][A-Za-z0-9._-]{0,59}(\/[A-Za-z0-9_][A-Za-z0-9._-]{0,59}){0,3}$/.test(path)) fail(`a source file is called "${path.slice(0, 80)}": letters, digits, . _ and - only, in at most three folders`);
     if (body.length > 256 * 1024) fail(`${path} is over 256 KB`);
   }
-  return { cassette: c, bytes: bytes.length, width, height, programs, screenshots: screenshots(c), art: c.extra.cover === undefined ? null : pictureOf(c.extra.cover, 'the cover') };
+  return { cassette: c, bytes: bytes.length, width, height, programs, screenshots: screenshots(c), art: c.extra.cover === undefined ? null : pictureOf(c.extra.cover, 'the cover'), pdf: manualOf(c) };
 }
 
 // The pictures a cassette carries: `screenshots`, up to four, and `cover`, its cover art;
@@ -85,6 +85,17 @@ function pictureOf(b64, what) {
   if (!png && !webp) fail(`${what} must be a PNG or a WebP`);
   if (bytes.length > 200 * 1024) fail(`${what} is over 200 KB`);
   return { ext: png ? 'png' : 'webp', bytes };
+}
+// The manual a cassette carries: `manual`, one PDF of 400 KB at most, as base64. -> its
+// bytes, null, or throws. Nothing here opens it: the site copies it out (manuals/<id>.pdf).
+function manualOf(c) {
+  const b64 = c.extra.manual;
+  if (b64 === undefined) return null;
+  if (typeof b64 !== 'string' || b64.length > 560000 || !/^[A-Za-z0-9+/=\s]*$/.test(b64)) fail('its manual isn\'t a PDF of 400 KB or less');
+  const bytes = Buffer.from(b64, 'base64');
+  if (bytes.length < 64 || bytes.toString('latin1', 0, 5) !== '%PDF-') fail('its manual must be a PDF');
+  if (bytes.length > 400 * 1024) fail('its manual is over 400 KB');
+  return bytes;
 }
 function screenshots(c) {
   const list = c.extra.screenshots;
@@ -116,7 +127,7 @@ export function sourceURL(v) {
 }
 
 function derive(entry) {
-  const { cassette: c, bytes, width, height, programs, screenshots: pics, art } = inspect(join(ROOT, entry.file));
+  const { cassette: c, bytes, width, height, programs, screenshots: pics, art, pdf } = inspect(join(ROOT, entry.file));
   // the cover: the site's own picture if the index names one, else the cassette's
   const ours = entry.cover && !entry.cover.startsWith(`covers/${entry.id}.`) ? entry.cover : null;
   const cover = ours || (art ? `covers/${entry.id}.${art.ext}` : null);
@@ -130,6 +141,7 @@ function derive(entry) {
     ...(cover ? { cover } : {}),
     ...(entry.shot ? { shot: entry.shot } : {}),
     ...(pics.length ? { shots: pics.map((p, i) => `shots/${entry.id}-${i + 1}.${p.ext}`) } : {}),
+    ...(pdf ? { manual: `manuals/${entry.id}.pdf` } : {}),
     ...(entry.deck ? { deck: true } : {}),
     ...(entry.keyboard ? { keyboard: true } : {}),
     machine: { ram: c.machine.ram, niece: !!c.machine.niece, ...(c.machine.aunt === false ? { aunt: false } : {}) },

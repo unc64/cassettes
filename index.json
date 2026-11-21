@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-21T15:04:41Z",
+ "updated": "2026-11-21T15:09:30Z",
  "cassettes": [
   {
    "id": "fellrider",
@@ -210,19 +210,20 @@
    "file": "cassettes/deephold.unc.png",
    "title": "DEEPHOLD",
    "author": "United Northern Computers",
-   "about": "A small text adventure in UNC BASIC: a cabin, a lamp, a troll, three treasures, and a dark that bites. Two-word commands. The manual rides on the cassette.",
+   "about": "A small text adventure in UNC BASIC: a cabin, a lamp, a troll, three treasures, and a dark that bites. Two-word commands. It comes with a manual.",
    "category": "game",
    "tags": [
     "adventure",
     "text",
     "basic"
    ],
-   "instructions": "Type what you want to do, a word or two, and press RETURN: N, S, E, W, U and D move, HELP lists the words. Find the three treasures under the cabin and lay them in the oak chest. Carry a light. It knows a word by its first three letters. The manual, MANUAL.md, is with the source.",
+   "instructions": "Type what you want to do, a word or two, and press RETURN: N, S, E, W, U and D move, HELP lists the words. Find the three treasures under the cabin and lay them in the oak chest. Carry a light. It knows a word by its first three letters. The manual rides on the cassette.",
    "shots": [
     "shots/deephold-1.png",
     "shots/deephold-2.png",
     "shots/deephold-3.png"
    ],
+   "manual": "manuals/deephold.pdf",
    "keyboard": true,
    "machine": {
     "ram": 16,
@@ -235,7 +236,7 @@
      "length": 8840
     }
    ],
-   "bytes": 193136,
+   "bytes": 313041,
    "width": 1004,
    "height": 638,
    "source": true,
