@@ -13,7 +13,8 @@
 // tags, controls, instructions, source_url (the author's own repository on GitHub, where
 // "Read the source" leads for a cassette that carries no source), cover and shot (pictures the site holds: a card shows the
 // screenshot with the cover on its corner, and the cassette's face without them), order (its place in the front row, for a featured one), deck (it saves and loads: the
-// Portal's player shows the tape deck's Rec and Play), featured, added, discuss (controls and instructions
+// Portal's player shows the tape deck's Rec and Play), keyboard (it's typed to, an adventure say: on a phone the
+// player offers the phone's own keyboard and no on-screen keys), featured, added, discuss (controls and instructions
 // come from the cassette when the index doesn't say). The rest is read from each cassette
 // (title, author, about, machine, programs, bytes, width, height, source, lang) and
 // rewritten by build, as is source/<id>/: each cassette's own source files, laid out to be
@@ -130,6 +131,7 @@ function derive(entry) {
     ...(entry.shot ? { shot: entry.shot } : {}),
     ...(pics.length ? { shots: pics.map((p, i) => `shots/${entry.id}-${i + 1}.${p.ext}`) } : {}),
     ...(entry.deck ? { deck: true } : {}),
+    ...(entry.keyboard ? { keyboard: true } : {}),
     machine: { ram: c.machine.ram, niece: !!c.machine.niece, ...(c.machine.aunt === false ? { aunt: false } : {}) },
     programs: programs.map((p) => ({ name: p.name, type: p.type, length: p.length })),
     bytes, width, height, source: !!c.files, lang,
