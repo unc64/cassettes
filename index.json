@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-21T14:30:06Z",
+ "updated": "2026-11-21T15:03:55Z",
  "cassettes": [
   {
    "id": "fellrider",
@@ -235,7 +235,7 @@
      "length": 8840
     }
    ],
-   "bytes": 213300,
+   "bytes": 193166,
    "width": 1004,
    "height": 638,
    "source": true,
@@ -269,7 +269,7 @@
      "length": 1949
     }
    ],
-   "bytes": 180839,
+   "bytes": 168730,
    "width": 1004,
    "height": 638,
    "source": true,
