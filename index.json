@@ -1,7 +1,7 @@
 {
  "format": "unc64-portal",
  "version": 1,
- "updated": "2026-11-21T15:09:30Z",
+ "updated": "2026-11-21T15:17:30Z",
  "cassettes": [
   {
    "id": "fellrider",
@@ -218,6 +218,7 @@
     "basic"
    ],
    "instructions": "Type what you want to do, a word or two, and press RETURN: N, S, E, W, U and D move, HELP lists the words. Find the three treasures under the cabin and lay them in the oak chest. Carry a light. It knows a word by its first three letters. The manual rides on the cassette.",
+   "cover": "covers/deephold.webp",
    "shots": [
     "shots/deephold-1.png",
     "shots/deephold-2.png",
@@ -236,7 +237,7 @@
      "length": 8840
     }
    ],
-   "bytes": 313041,
+   "bytes": 406624,
    "width": 1004,
    "height": 638,
    "source": true,
